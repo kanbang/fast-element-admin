@@ -67,11 +67,15 @@
 </template>
 
 <script setup lang="ts" name="home">
-import { reactive, onMounted, ref, watch, nextTick, onActivated, markRaw } from 'vue';
+import { reactive, onMounted, onUnmounted, ref, watch, nextTick, onActivated, markRaw } from 'vue';
 import * as echarts from 'echarts';
 import { storeToRefs } from 'pinia';
 import { useThemeConfig } from '/@/stores/themeConfig';
 import { useTagsViewRoutes } from '/@/stores/tagsViewRoutes';
+
+import { useMQTT } from 'mqtt-vue-hook';
+
+const mqttHook = useMQTT();
 
 // 定义变量内容
 const homeLineRef = ref();
@@ -505,7 +509,36 @@ const initEchartsResize = () => {
 // 页面加载时
 onMounted(() => {
 	initEchartsResize();
+
+	mqttHook.subscribe(
+		['topic1', 'topic2'],
+		1,
+		{
+			// properties: {
+			//     userProperties: {...}
+			// },
+		},
+		() => {
+			console.log('subscribed!');
+		}
+	);
+
+	mqttHook.registerEvent(
+		'topic1',
+		(topic, message) => {
+			console.log(topic, ': message!');
+		},
+		'string_key'
+	);
 });
+
+onUnmounted(() => {
+	// mqttHook.unRegisterEvent(topic, vm)
+	mqttHook.unRegisterEvent('topic1', 'string_key');
+	mqttHook.unRegisterEvent('topic2', 'string_key');
+	mqttHook.unRegisterEvent('on-connect', 'string_key');
+});
+
 // 由于页面缓存原因，keep-alive
 onActivated(() => {
 	initEchartsResizeFun();
