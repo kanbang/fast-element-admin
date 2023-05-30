@@ -1,8 +1,16 @@
+<!--
+ * @Descripttion: 
+ * @version: 0.x
+ * @Author: zhai
+ * @Date: 2023-05-26 08:49:32
+ * @LastEditors: zhai
+ * @LastEditTime: 2023-05-30 12:54:23
+-->
 <template>
 	<div class="layout-footer pb15">
 		<div class="layout-footer-warp">
 			<div>fast-element-admin，Made by bzx with ❤️</div>
-			<div class="mt5">深圳市 xxx 公司版权所有</div>
+			<div class="mt5">版权所有</div>
 		</div>
 	</div>
 </template>

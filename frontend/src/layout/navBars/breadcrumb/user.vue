@@ -1,11 +1,11 @@
 <template>
   <div class="layout-navbars-breadcrumb-user pr15" :style="{ flex: layoutUserFlexNum }">
 
-    <div class="layout-navbars-breadcrumb-user-icon" title="git仓库" @click="onWareHouse">
+    <!-- <div class="layout-navbars-breadcrumb-user-icon" title="git仓库" @click="onWareHouse">
       <svgIcon name="iconfont icon-github"></svgIcon>
-    </div>
+    </div> -->
 
-    <el-dropdown :show-timeout="70" :hide-timeout="50" trigger="click" @command="onComponentSizeChange">
+    <!-- <el-dropdown :show-timeout="70" :hide-timeout="50" trigger="click" @command="onComponentSizeChange">
       <div class="layout-navbars-breadcrumb-user-icon">
         <i class="iconfont icon-fuhao-ziti" title="组件大小"></i>
       </div>
@@ -16,16 +16,19 @@
           <el-dropdown-item command="small" :disabled="state.disabledSize === 'small'">小型</el-dropdown-item>
         </el-dropdown-menu>
       </template>
-    </el-dropdown>
-    <div class="layout-navbars-breadcrumb-user-icon" @click="onSearchClick">
+    </el-dropdown> -->
+
+    <!-- <div class="layout-navbars-breadcrumb-user-icon" @click="onSearchClick">
       <el-icon title="菜单搜索">
         <ele-Search/>
       </el-icon>
-    </div>
+    </div> -->
+
     <div class="layout-navbars-breadcrumb-user-icon" @click="onLayoutSetingClick">
       <i class="iconfont icon-zhuti" title="布局配置"></i>
     </div>
-    <div class="layout-navbars-breadcrumb-user-icon">
+     
+    <!-- <div class="layout-navbars-breadcrumb-user-icon">
       <el-popover placement="bottom" trigger="click" transition="el-zoom-in-top" :width="300" :persistent="false">
         <template #reference>
           <el-badge :is-dot="true">
@@ -38,7 +41,7 @@
           <UserNews/>
         </template>
       </el-popover>
-    </div>
+    </div> -->
     <div class="layout-navbars-breadcrumb-user-icon mr10" @click="onScreenfullClick">
       <i
           class="iconfont"
