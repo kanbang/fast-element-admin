@@ -1,9 +1,33 @@
+'''
+Descripttion: 
+version: 0.x
+Author: zhai
+Date: 2023-05-26 08:49:32
+LastEditors: zhai
+LastEditTime: 2023-05-31 14:52:07
+'''
+'''
+Descripttion: 
+version: 0.x
+Author: zhai
+Date: 2023-05-26 08:49:32
+LastEditors: zhai
+LastEditTime: 2023-05-31 12:05:55
+'''
+'''
+Descripttion: 
+version: 0.x
+Author: zhai
+Date: 2023-05-26 08:49:32
+LastEditors: zhai
+LastEditTime: 2023-05-31 11:06:46
+'''
 # -*- coding: utf-8 -*-
 # @author: xiaobai
 
 
 import uvicorn
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 
 from config import config
 from app.corelibs.logger import init_logger, logger
@@ -15,7 +39,22 @@ from app.init.routers import init_router
 from app.init.dependencies import set_global_request
 # from app.models import init_db
 
-app = FastAPI(title="fast_element_admin", description=config.PROJECT_DESC,
+from fastapi.security import OAuth2PasswordBearer
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{config.API_PREFIX}/user/login")
+
+# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
+
+def token_auth(token: str=Depends(oauth2_scheme)):
+    if not token:
+        raise HTTPException(401, "Invalid token")
+
+# router = MemoryCRUDRouter(schema=MySchema, dependencies=[Depends(token_auth)])
+# app.include_router(router)
+
+
+
+app = FastAPI(title="Admin", description=config.PROJECT_DESC,
               version=config.PROJECT_VERSION,
               dependencies=[Depends(set_global_request)])
 
@@ -49,6 +88,9 @@ async def startup():
 async def shutdown():
     await app.state.redis.close()  # 关闭 redis
 
+@app.get("/token")
+async def token(token: str = Depends(oauth2_scheme)):
+    return {"token": token}
 
 # gunicorn main:app --workers 2 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8101
 if __name__ == '__main__':

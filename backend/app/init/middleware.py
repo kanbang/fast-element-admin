@@ -1,3 +1,11 @@
+'''
+Descripttion: 
+version: 0.x
+Author: zhai
+Date: 2023-05-26 08:49:32
+LastEditors: zhai
+LastEditTime: 2023-05-31 14:50:46
+'''
 # -*- coding: utf-8 -*-
 # @author: xiaobai
 import time
@@ -68,11 +76,13 @@ def init_middleware(app: FastAPI):
         g.token = token
         remote_addr = request.headers.get("X-Real-IP", request.client.host)
         logger.info(f"访问记录:IP:{remote_addr}-method:{request.method}-url:{request.url}")
+        
         # 登录校验
-        try:
-            await login_verification(request)
-        except AccessTokenFail as err:
-            return partner_success(code=err.code, msg=err.msg)
+        # try:
+        #     await login_verification(request)
+        # except AccessTokenFail as err:
+        #     return partner_success(code=err.code, msg=err.msg)
+
         response = await call_next(request)
         response.headers["X-request-id"] = g.trace_id
         logger.info(f"请求耗时： {time.time() - start_time}")

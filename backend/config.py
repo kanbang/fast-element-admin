@@ -1,3 +1,11 @@
+'''
+Descripttion: 
+version: 0.x
+Author: zhai
+Date: 2023-05-26 10:17:47
+LastEditors: zhai
+LastEditTime: 2023-05-31 11:05:43
+'''
 # -*- coding: utf-8 -*-
 # @author: xiaobai
 import os
@@ -6,7 +14,7 @@ import typing
 from pydantic import BaseSettings, AnyHttpUrl, Field
 
 project_desc = """
-    🎉 fast-element-admin 管理员接口汇总 🎉
+    🎉 接口汇总 🎉
     ✨ 账号: admin ✨
     ✨ 密码: 123456 ✨
     ✨ 权限(scopes): admin ✨
